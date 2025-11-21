@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX PRO – Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0E0E0E;
+    color: white;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: #111;
+    height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #222;
+}
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ff444f;
+    margin-bottom: 40px;
+}
+.nav-item {
+    margin-bottom: 18px;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+}
+.nav-item:hover {
+    background: #1b1b1b;
+}
+
+/* Main content */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Topbar */
+.topbar {
+    height: 60px;
+    background: #111;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    justify-content: space-between;
+}
+.balance { font-size: 18px; }
+.user { font-size: 16px; color: #ff444f; }
+
+/* Trading area */
+.chart-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Assets panel */
+.assets {
+    width: 220px;
+    background: #111;
+    border-right: 1px solid #222;
+    padding: 10px;
+    overflow-y: auto;
+}
+.asset {
+    padding: 12px;
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+}
+.asset:hover { background: #1b1b1b; }
+
+/* Chart panel */
+.chart {
+    flex: 1;
+    background: #0E0E0E;
+    padding: 10px;
+}
+
+/* Order panel */
+.order-panel {
+    width: 300px;
+    background: #111;
+    border-left: 1px solid #222;
+    padding: 20px;
+}
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.buy { background: #0abb78; }
+.sell { background: #ff444f; }
+.deposit { background: #1c64f2; }
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+}
+
+@media(max-width: 768px){
+    .chart-area { flex-direction: column; }
+    .assets, .order-panel { width: 100%; }
+    .chart { height: 300px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="logo">FX PRO</div>
+    <div class="nav-item" onclick="showSection('trading')">Trading</div>
+    <div class="nav-item" onclick="showSection('bots')">Bots</div>
+    <div class="nav-item" onclick="showSection('cashier')">Cashier</div>
+    <div class="nav-item" onclick="showSection('wallet')">Wallet</div>
+    <div class="nav-item" onclick="showSection('profile')">Profile</div>
+    <div class="nav-item" onclick="logout()">Logout</div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="balance" id="walletBalance">Balance: KES 0.00</div>
+        <div class="user" id="userName">Trader</div>
+    </div>
+
+    <!-- Trading area -->
+    <div class="chart-area">
+
+        <!-- Assets -->
+        <div class="assets" id="assetsList">
+            <div class="asset" data-symbol="R_100">Volatility 100 Index</div>
+            <div class="asset" data-symbol="R_75">Volatility 75 Index</div>
+            <div class="asset" data-symbol="boom500">Boom 500</div>
+            <div class="asset" data-symbol="crash500">Crash 500</div>
+            <div class="asset" data-symbol="step">Step Index</div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart" id="chart"></div>
+
+        <!-- Order panel -->
+        <div class="order-panel">
+            <h3>Trade Settings</h3>
+            <input type="number" id="tradeAmount" placeholder="Amount (KES)">
+            <select id="tradeType">
+                <option value="buy">BUY</option>
+                <option value="sell">SELL</option>
+            </select>
+            <button class="buy" id="openTradeBtn">OPEN TRADE</button>
+            <button class="sell" id="closeTradeBtn">CLOSE TRADE</button>
+            <button class="deposit" id="depositBtn">Deposit</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/wallet.js"></script>
+<script type="module" src="js/chart.js"></script>
+<script type="module" src="js/trade.js"></script>
+
+<script>
+function logout() {
+    localStorage.clear();
+    window.location.href = 'auth.html';
+}
+
+function showSection(section) {
+    alert('Switching to ' + section); // sections for future implementation
+}
+
+// Load wallet balance from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+    const balance = localStorage.getItem('walletBalance') || 0;
+    document.getElementById('walletBalance').textContent = `Balance: KES ${balance}`;
+});
+</script>
+
+</body>
+</html>

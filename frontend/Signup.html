@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX PRO – Create Account</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #f2f3f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .signup-container {
+        background: #fff;
+        width: 380px;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+    }
+    .input-group {
+        margin-bottom: 15px;
+    }
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+        color: #444;
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d2d2d2;
+        border-radius: 6px;
+        outline: none;
+        font-size: 14px;
+    }
+    input:focus {
+        border-color: #ff444f;
+    }
+    .btn {
+        width: 100%;
+        background: #ff444f;
+        padding: 12px;
+        border: none;
+        color: white;
+        border-radius: 6px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.2s;
+    }
+    .btn:hover {
+        background: #e03b46;
+    }
+    .bottom-links {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    a {
+        color: #ff444f;
+        text-decoration: none;
+    }
+    .support-box {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #444;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="signup-container">
+    <h2>Create Your FX PRO Account</h2>
+
+    <div class="input-group">
+        <label>First Name</label>
+        <input type="text" id="fname">
+    </div>
+
+    <div class="input-group">
+        <label>Last Name</label>
+        <input type="text" id="lname">
+    </div>
+
+    <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="email">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password">
+    </div>
+
+    <div class="input-group">
+        <label>Confirm Password</label>
+        <input type="password" id="cpassword">
+    </div>
+
+    <button class="btn" onclick="register()">Create Account</button>
+
+    <div class="bottom-links">
+        Already have an account?
+        <a href="index.html">Login</a>
+    </div>
+
+    <div class="support-box">
+        Support:<br>
+        📧 Email: <strong>fellowz9771@gmail.com</strong><br>
+        📱 WhatsApp: <strong>+254797378249</strong>
+    </div>
+</div>
+
+<script>
+function register() {
+    const fname = document.getElementById("fname").value;
+    const lname = document.getElementById("lname").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const cpassword = document.getElementById("cpassword").value;
+
+    if (!fname || !lname || !email || !password || !cpassword) {
+        alert("Please fill all fields.");
+        return;
+    }
+    if (password !== cpassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    // Save user locally (temporary)
+    localStorage.setItem("fxUser", JSON.stringify({
+        fname, lname, email, password, balance: 0
+    }));
+ 
+    alert("Account created successfully!");
+    window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

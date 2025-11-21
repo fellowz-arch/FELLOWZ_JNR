@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FX PRO – Bots</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Deriv fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      color: #0b1a3a;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #0b1a3a;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: #d0d4e4;
+      padding: 12px 18px;
+      display: block;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    .sidebar a:hover,
+    .active {
+      background: #1c64f2;
+      color: white !important;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .page-title {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .bots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .bot-card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: 0.2s ease;
+    }
+    .bot-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .bot-name {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .bot-desc {
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .run-btn {
+      background: #1c64f2;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border-radius: 12px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .run-btn:hover {
+      background: #0b5bd3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>FX PRO</h2>
+
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="bots.html" class="active">🤖 Trading Bots</a>
+    <a href="profile.html">👤 Profile</a>
+    <a href="index.html">🚪 Logout</a>
+
+    <hr style="border-color: #314164; margin: 20px 0;">
+
+    <p style="font-size: 13px; opacity: 0.6;">Support:</p>
+    <p style="font-size: 13px;">📧 fellowz9771@gmail.com<br>📱 +254797378249</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="page-title">Automated Trading Bots</div>
+
+    <div class="bots-grid">
+
+      <!-- Bot 1 -->
+      <div class="bot-card">
+        <div class="bot-name">SmartSpike Bot</div>
+        <div class="bot-desc">Detects sudden market spikes and enters trades automatically.</div>
+        <button class="run-btn" onclick="startBot('SmartSpike Bot')">Run Bot</button>
+      </div>
+
+      <!-- Bot 2 -->
+      <div class="bot-card">
+        <div class="bot-name">TrendMaster AI</div>
+        <div class="bot-desc">Uses AI to detect strong bullish or bearish trends.</div>
+        <button class="run-btn" onclick="startBot('TrendMaster AI')">Run Bot</button>
+      </div>
+
+      <!-- Bot 3 -->
+      <div class="bot-card">
+        <div class="bot-name">Volatility Hunter</div>
+        <div class="bot-desc">Perfect for Volatility 75/100 — detects high-speed movements.</div>
+        <button class="run-btn" onclick="startBot('Volatility Hunter')">Run Bot</button>
+      </div>
+
+      <!-- Bot 4 -->
+      <div class="bot-card">
+        <div class="bot-name">Scalper Pro X</div>
+        <div class="bot-desc">Rapid buy/sell scalping with tight TP/SL.</div>
+        <button class="run-btn" onclick="startBot('Scalper Pro X')">Run Bot</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function startBot(botName) {
+      alert(botName + " is now running...\n(Backend bot engine coming next!)");
+    }
+  </script>
+</body>
+</html>

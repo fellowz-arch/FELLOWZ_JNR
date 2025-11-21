@@ -1,0 +1,232 @@
+/* ============================
+   GLOBAL VARIABLES (Deriv X THEME)
+   ============================ */
+:root {
+  --bg-dark: #0e0e11;
+  --bg-light: #1a1a1d;
+  --bg-panel: #1c1c20;
+  --bg-hover: #242428;
+  --bg-card: #161618;
+
+  --text-white: #ffffff;
+  --text-gray: #b3b3b3;
+  --text-light: #dcdcdc;
+
+  --primary-red: #ff444f;
+  --primary-green: #00c176;
+  --primary-blue: #3772ff;
+
+  --border-color: #2a2a2d;
+
+  --radius: 6px;
+}
+
+/* ============================
+   GLOBAL RESET
+   ============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-white);
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1d;
+}
+
+/* ============================
+   MAIN APP WRAPPER
+   ============================ */
+#app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ============================
+   SIDEBAR
+   ============================ */
+.sidebar {
+  width: 240px;
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.sidebar-logo {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: var(--primary-red);
+}
+
+.sidebar-item {
+  padding: 15px 20px;
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 15px;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: var(--bg-hover);
+  color: var(--text-white);
+}
+
+/* ============================
+   TOP NAVBAR
+   ============================ */
+.navbar {
+  height: 60px;
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.nav-title {
+  font-size: 18px;
+  color: var(--text-light);
+}
+
+/* ============================
+   MAIN CONTENT
+   ============================ */
+.main-content {
+  flex: 1;
+  background: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-area {
+  flex: 1;
+  background: #000;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ============================
+   TRADE TERMINAL
+   ============================ */
+.trade-terminal {
+  height: 260px;
+  background: var(--bg-panel);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ============================
+   COMMON COMPONENTS
+   ============================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: var(--radius);
+}
+
+.card-title {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 10px;
+  background: var(--bg-light);
+  color: var(--text-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px;
+  text-align: center;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: none;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.btn-buy {
+  background: var(--primary-green);
+  color: #fff;
+}
+
+.btn-sell {
+  background: var(--primary-red);
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table thead tr {
+  background: var(--bg-hover);
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-gray);
+}
+
+/* =============================
+   RESPONSIVE DESIGN
+   ============================= */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 70px;
+  }
+
+  .sidebar-item {
+    font-size: 0;
+  }
+
+  .chart-area {
+    height: 45vh;
+  }
+
+  .trade-terminal {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}

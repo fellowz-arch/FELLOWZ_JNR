@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX PRO – Cashier</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            color: #e60000;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #0b1a3a;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #e60000;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c00000;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .tab-buttons button {
+            flex: 1;
+            background: #0b1a3a;
+        }
+
+        .tab-buttons button.active {
+            background: #e60000;
+        }
+
+        .transaction-box {
+            margin-top: 25px;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .support {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 6px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP HEADER -->
+    <div class="header">
+        <h1>FX PRO – Cashier</h1>
+        <a href="dashboard.html" style="color:#0b1a3a; font-size:16px; text-decoration:none;">← Back to Dashboard</a>
+    </div>
+
+    <div class="container">
+
+        <div class="section-title">Wallet Balance</div>
+        <h2 id="walletAmount">KES 0.00</h2>
+
+        <!-- Tabs -->
+        <div class="tab-buttons">
+            <button id="depositTab" class="active" onclick="showTab('deposit')">Deposit</button>
+            <button id="withdrawTab" onclick="showTab('withdraw')">Withdraw</button>
+        </div>
+
+        <!-- Deposit Section -->
+        <div id="depositSection">
+            <div class="section-title">Deposit via M-Pesa</div>
+
+            <label>Phone Number (2547XXXXXXX)</label>
+            <input type="text" id="depositPhone" placeholder="2547XXXXXXXX">
+
+            <label>Amount (KES)</label>
+            <input type="number" id="depositAmount" placeholder="100">
+
+            <button onclick="deposit()">Deposit Now</button>
+        </div>
+
+        <!-- Withdraw Section -->
+        <div id="withdrawSection" style="display:none;">
+            <div class="section-title">Withdraw via M-Pesa</div>
+
+            <label>Phone Number (2547XXXXXXX)</label>
+            <input type="text" id="withdrawPhone" placeholder="2547XXXXXXXX">
+
+            <label>Amount (KES)</label>
+            <input type="number" id="withdrawAmount" placeholder="100">
+
+            <button onclick="withdraw()">Withdraw Now</button>
+        </div>
+
+        <!-- Support -->
+        <div class="support">
+            <p><strong>Email Support:</strong> fellowz9771@gmail.com</p>
+            <p><strong>WhatsApp:</strong> +254 797 378 249</p>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transaction-box">
+            <h3>Transaction History</h3>
+            <p>No transactions yet.</p>
+        </div>
+
+    </div>
+
+<script>
+function showTab(tab) {
+    document.getElementById("depositSection").style.display = tab === "deposit" ? "block" : "none";
+    document.getElementById("withdrawSection").style.display = tab === "withdraw" ? "block" : "none";
+
+    document.getElementById("depositTab").classList.toggle("active", tab === "deposit");
+    document.getElementById("withdrawTab").classList.toggle("active", tab === "withdraw");
+}
+
+function deposit() {
+    const phone = document.getElementById("depositPhone").value;
+    const amount = document.getElementById("depositAmount").value;
+
+    if (!phone || !amount) return alert("Fill all fields");
+
+    fetch("http://localhost:5000/mpesa/stkpush", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ phone, amount })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("STK Push Sent! Check your phone.");
+        updateWallet(amount);
+    });
+}
+
+function withdraw() {
+    const phone = document.getElementById("withdrawPhone").value;
+    const amount = document.getElementById("withdrawAmount").value;
+
+    if (!phone || !amount) return alert("Fill all fields");
+
+    alert("Withdrawal request submitted. Admin will process soon.");
+}
+
+let walletBalance = 0;
+
+function updateWallet(amount) {
+    walletBalance += parseInt(amount);
+    document.getElementById("walletAmount").textContent = "KES " + walletBalance.toFixed(2);
+}
+</script>
+
+</body>
+</html>

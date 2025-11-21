@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX PRO – Wallet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #f2f3f4;
+    }
+
+    .nav {
+        background: white;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav h2 {
+        margin: 0;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .nav a {
+        color: #ff444f;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .wallet-container {
+        width: 90%;
+        max-width: 750px;
+        margin: 30px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+        color: #333;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .account-box {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .account-box h4 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .amount {
+        font-size: 28px;
+        font-weight: 700;
+        margin-top: 10px;
+        color: #222;
+    }
+
+    .btn {
+        background: #ff444f;
+        border: none;
+        color: white;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+
+    .btn:hover {
+        background: #e13b46;
+    }
+
+    .transfer-box {
+        margin-top: 35px;
+        background: #fafafa;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #444;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    input:focus, select:focus {
+        border-color: #ff444f;
+    }
+
+    .links {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .links a {
+        display: block;
+        margin: 10px 0;
+        color: #ff444f;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .support {
+        text-align: center;
+        margin-top: 35px;
+        font-size: 14px;
+        color: #444;
+    }
+
+    .support strong {
+        color: #ff444f;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="nav">
+    <h2>FX PRO Wallet</h2>
+    <a href="dashboard.html">← Back to Trading</a>
+</div>
+
+<!-- WALLET MAIN AREA -->
+<div class="wallet-container">
+
+    <h3>Your Accounts</h3>
+
+    <!-- REAL ACCOUNT -->
+    <div class="account-box">
+        <h4>Real Account</h4>
+        <div class="amount" id="realBalanceDisplay">KES 0</div>
+        <button class="btn" onclick="goCashier()">Deposit / Withdraw</button>
+    </div>
+
+    <!-- DEMO ACCOUNT -->
+    <div class="account-box">
+        <h4>Demo Account</h4>
+        <div class="amount" id="demoBalanceDisplay">KES 10,000</div>
+    </div>
+
+    <!-- TRANSFER BOX -->
+    <div class="transfer-box">
+        <h4>Transfer Funds</h4>
+
+        <label>From</label>
+        <select id="fromAccount">
+            <option value="real">Real Account</option>
+            <option value="demo">Demo Account</option>
+        </select>
+
+        <label>To</label>
+        <select id="toAccount">
+            <option value="demo">Demo Account</option>
+            <option value="real">Real Account</option>
+        </select>
+
+        <label>Amount (KES)</label>
+        <input type="number" id="transferAmount">
+
+        <button class="btn" onclick="transfer()">Transfer</button>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="links">
+        <a href="cashier.html">Open Cashier</a>
+        <a href="profile.html">Profile Settings</a>
+        <a href="bots.html">Trading Bots</a>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="support">
+        Support:<br>
+        📧 Email: <strong>fellowz9771@gmail.com</strong><br>
+        📱 WhatsApp: <strong>+254797378249</strong>
+    </div>
+</div>
+
+<script>
+// Load user
+let user = JSON.parse(localStorage.getItem("fxUser"));
+let realBalance = user?.balance ?? 0;
+let demoBalance = Number(localStorage.getItem("fxDemo")) || 10000;
+
+document.getElementById("realBalanceDisplay").textContent = "KES " + realBalance;
+document.getElementById("demoBalanceDisplay").textContent = "KES " + demoBalance.toLocaleString();
+
+// Cashier redirect
+function goCashier() {
+    window.location.href = "cashier.html";
+}
+
+// Transfer funds
+function transfer() {
+    const from = document.getElementById("fromAccount").value;
+    const to = document.getElementById("toAccount").value;
+    const amount = Number(document.getElementById("transferAmount").value);
+
+    if (from === to) return alert("You cannot transfer between the same account.");
+    if (amount <= 0) return alert("Enter a valid amount.");
+
+    if (from === "real" && amount > realBalance) return alert("Insufficient real balance.");
+    if (from === "demo" && amount > demoBalance) return alert("Insufficient demo balance.");
+
+    // process transfer
+    if (from === "real") realBalance -= amount;
+    else demoBalance -= amount;
+
+    if (to === "real") realBalance += amount;
+    else demoBalance += amount;
+
+    // save
+    user.balance = realBalance;
+    localStorage.setItem("fxUser", JSON.stringify(user));
+    localStorage.setItem("fxDemo", demoBalance);
+
+    // update UI
+    document.getElementById("realBalanceDisplay").textContent = "KES " + realBalance;
+    document.getElementById("demoBalanceDisplay").textContent = "KES " + demoBalance.toLocaleString();
+
+    alert("Transfer successful!");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: fellowz-fxpro-backend
+    env: node
+    region: frankfurt
+    rootDir: .
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    plan: free
+    autoDeploy: true
