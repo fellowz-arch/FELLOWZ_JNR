@@ -1,10 +1,20 @@
+# render.yaml - for both backend and frontend
+
 services:
   - type: web
-    name: fellowz-fxpro-backend
+    name: fxpro-backend
     env: node
-    region: frankfurt
-    rootDir: .
-    buildCommand: "npm install"
-    startCommand: "node server.js"
+    region: oregon   # change if needed
+    plan: free       # choose your plan
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    autoDeploy: true
+
+  - type: web
+    name: fxpro-frontend
+    env: static
+    region: oregon   # change if needed
     plan: free
+    rootDir: frontend
     autoDeploy: true
