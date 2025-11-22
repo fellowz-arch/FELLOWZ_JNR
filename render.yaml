@@ -3,15 +3,13 @@ services:
     name: fxpro-backend
     env: node
     region: oregon
-    plan: starter       # use "starter" for free backend
-    rootDir: backend    # <- points to the folder with package.json
+    plan: starter       # free backend plan
+    rootDir: backend    # points to your package.json
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
 
-  - type: static
+  - type: static_site
     name: fxpro-frontend
-    env: static
-    region: oregon
     rootDir: frontend
     autoDeploy: true
