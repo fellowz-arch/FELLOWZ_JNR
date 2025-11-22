@@ -1,20 +1,18 @@
-# render.yaml - for both backend and frontend
-
 services:
   - type: web
     name: fxpro-backend
     env: node
-    region: oregon   # change if needed
-    plan: free       # choose your plan
+    region: oregon
+    plan: free
+    rootDir: backend
     buildCommand: npm install
     startCommand: npm start
-    rootDir: backend
     autoDeploy: true
 
   - type: web
     name: fxpro-frontend
     env: static
-    region: oregon   # change if needed
+    region: oregon
     plan: free
     rootDir: frontend
     autoDeploy: true
