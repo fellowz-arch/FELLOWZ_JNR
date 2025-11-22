@@ -12,7 +12,6 @@ services:
   - type: web
     name: fxpro-frontend
     env: static
-    region: oregon
     plan: free
     rootDir: frontend
     autoDeploy: true
