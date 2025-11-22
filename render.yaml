@@ -3,7 +3,7 @@ services:
     name: fxpro-backend
     env: node
     region: oregon
-    plan: free
+    plan: starter        # backend uses starter (NOT free)
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
@@ -12,6 +12,5 @@ services:
   - type: web
     name: fxpro-frontend
     env: static
-    plan: free
     rootDir: frontend
     autoDeploy: true
