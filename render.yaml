@@ -2,9 +2,24 @@ services:
   - type: web
     name: fxpro-backend
     env: node
-    region: oregon
-    plan: starter
-    rootDir: backend
-    buildCommand: npm install
-    startCommand: npm start
-    autoDeploy: true
+    region: singapore
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        value: ${MONGO_URI}
+      - key: JWT_SECRET
+        value: ${JWT_SECRET}
+      - key: MPESA_KEY
+        value: ${MPESA_KEY}
+      - key: MPESA_SECRET
+        value: ${MPESA_SECRET}
+      - key: MPESA_SHORTCODE
+        value: ${MPESA_SHORTCODE}
+      - key: MPESA_PASSKEY
+        value: ${MPESA_PASSKEY}
+      - key: MPESA_CALLBACK_URL
+        value: ${MPESA_CALLBACK_URL}
