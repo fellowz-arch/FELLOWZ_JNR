@@ -1,0 +1,21 @@
+{
+  "services": [
+    {
+      "name": "fxpro-backend",
+      "type": "web",
+      "env": "node",
+      "rootDir": "backend",
+      "buildCommand": "npm install",
+      "startCommand": "npm start",
+      "port": 5000,
+      "healthcheckPath": "/api/health",
+      "autoDeploy": true
+    },
+    {
+      "name": "fxpro-frontend",
+      "type": "static",
+      "rootDir": "../frontend",
+      "autoDeploy": true
+    }
+  ]
+}
