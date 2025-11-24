@@ -1,6 +1,8 @@
 # Built things
 _Debug/
+
 Compiled/
+echo "node_modules/" >> .gitignore
 
 # AudioCache can be rebuilt from sources
 AudioCache/
